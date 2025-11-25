@@ -1,4 +1,6 @@
 let sp = [];
+let estaMoviendo = false;
+let stopTimer;
 
 function setup() {
 	angleMode(DEGREES);
@@ -8,28 +10,42 @@ function setup() {
 function draw() {
 	background(50, 10, 0, 100);
 
-	for (let i = 0; i < sp.length - 1; i++) {
-		noFill();
-		stroke(255, 0, 0);
-		line(sp[i].pos.x, sp[i].pos.y, sp[i + 1].pos.x, sp[i + 1].pos.y);
+	if (!estaMoviendo) {
+		for (let i = 0; i < sp.length - 1; i++) {
+			noFill();
+			stroke(255, 0, 0);
+			line(sp[i].pos.x, sp[i].pos.y, sp[i + 1].pos.x, sp[i + 1].pos.y);
+		}
 	}
 
 	for (const [index, particula] of sp.entries()) {
-		particula.update();
-		particula.display();
+		particula.update(estaMoviendo);
+		particula.display(estaMoviendo);
 		if (particula.estaMuerta) {
 			sp.splice(index, 1);
-			console.log('n Partículas: ' + sp.length);
+			// console.log('n Partículas: ' + sp.length);
 		}
 	}
 
 	let np = new Particula(mouseX, mouseY);
 	sp.push(np);
+
+	console.log(estaMoviendo);
 }
 
 function mouseClicked() {
 	let np = new Particula(mouseX, mouseY);
 	sp.push(np);
 
-	console.log('n Partículas: ' + sp.length);
+	// console.log('n Partículas: ' + sp.length);
+}
+
+function mouseMoved() {
+	estaMoviendo = true;
+
+	clearTimeout(stopTimer);
+
+	stopTimer = setTimeout(() => {
+		estaMoviendo = false;
+	}, 100);
 }

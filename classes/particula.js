@@ -18,9 +18,11 @@ class Particula {
 		// console.log('Hola, estoy viva');
 	}
 
-	update() {
+	update(_estaMoviendo) {
 		if (!this.estaMuerta) {
-			this.vel.add(this.gravedad);
+			if (_estaMoviendo) {
+				this.vel.add(this.gravedad);
+			}
 			this.vel.normalize();
 			this.vel.setMag(3);
 			this.vel.rotate(this.velAngula);
@@ -33,12 +35,13 @@ class Particula {
 			this.estaMuerta = true;
 		}
 	}
-	display() {
+	display(_estaMoviendo) {
 		fill(this.c);
 		noStroke();
 
 		this.diamFinal = map(this.tVida, this.tVidaInicial, 0, this.diam, 0);
-
-		circle(this.pos.x, this.pos.y, this.diamFinal);
+		if (_estaMoviendo) {
+			circle(this.pos.x, this.pos.y, this.diamFinal);
+		}
 	}
 }
