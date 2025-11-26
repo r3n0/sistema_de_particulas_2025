@@ -8,8 +8,9 @@ function setup() {
 	// frameRate(1);
 	angleMode(DEGREES);
 	createCanvas(windowWidth, windowHeight);
+	rectMode(CENTER);
 
-	for (let i = 0; i < 500; i++) {
+	for (let i = 0; i < 100; i++) {
 		let ne = new Estrella();
 		estrellas.push(ne);
 	}
@@ -35,8 +36,10 @@ function draw() {
 		}
 	}
 
-	let np = new Particula(mouseX, mouseY);
-	sp.push(np);
+	if (frameCount % 5 == 0) {
+		let np = new Particula(mouseX, mouseY);
+		sp.push(np);
+	}
 
 	// console.log(estaMoviendo);
 
