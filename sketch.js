@@ -36,6 +36,7 @@ function draw() {
 		}
 	}
 
+	//Crear partículas cada 5 frames
 	if (frameCount % 5 == 0) {
 		let np = new Particula(mouseX, mouseY);
 		sp.push(np);

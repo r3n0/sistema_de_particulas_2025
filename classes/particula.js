@@ -46,7 +46,9 @@ class Particula {
 
 		this.diamFinal = map(this.tVida, this.tVidaInicial, 0, this.diam, 0);
 
+		//Dibuja las partículas solo si el mouse se mueve
 		if (_estaMoviendo) {
+			//Usa push y pop para mover el sistema de coordenadas y poder rotar
 			push();
 			translate(this.pos.x, this.pos.y);
 			rotate(this.angulo);
