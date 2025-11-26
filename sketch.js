@@ -2,9 +2,17 @@ let sp = [];
 let estaMoviendo = false;
 let stopTimer;
 
+let estrellas = [];
+
 function setup() {
+	// frameRate(1);
 	angleMode(DEGREES);
 	createCanvas(windowWidth, windowHeight);
+
+	for (let i = 0; i < 500; i++) {
+		let ne = new Estrella();
+		estrellas.push(ne);
+	}
 }
 
 function draw() {
@@ -30,7 +38,12 @@ function draw() {
 	let np = new Particula(mouseX, mouseY);
 	sp.push(np);
 
-	console.log(estaMoviendo);
+	// console.log(estaMoviendo);
+
+	for (e of estrellas) {
+		e.update();
+		e.display();
+	}
 }
 
 function mouseClicked() {
